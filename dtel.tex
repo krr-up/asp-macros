@@ -1,3 +1,18 @@
-\newcommand{\DBox}[1]{\ensuremath{[#1]\,}}
-\newcommand{\DDia}[1]{\ensuremath{\langle#1\rangle\,}}
-\newcommand{\Rel}[2]{\ensuremath{{\parallel}{#1}{\parallel}^{#2}}}
+\newcommand{\next}{\text{\rm \raisebox{-.5pt}{\Large\textopenbullet}}}  % {{\ensuremath{\circ}}}
+\newcommand{\previous}{\text{\rm \raisebox{-.5pt}{\Large\textbullet}}}  % {{\ensuremath{\bullet}}}
+\newcommand{\wnext}{\ensuremath{\widehat{\next}}}
+\newcommand{\wprevious}{\ensuremath{\widehat{\previous}}}
+\newcommand{\alwaysF}{\ensuremath{\square}}
+\newcommand{\alwaysP}{\ensuremath{\blacksquare}}
+\newcommand{\eventuallyF}{\ensuremath{\Diamond}}
+\newcommand{\eventuallyP}{\ensuremath{\blacklozenge}}
+\newcommand{\until}{\ensuremath{\mathbin{\bm{\mathsf{U}}}}}
+\newcommand{\release}{\ensuremath{\mathbin{\bm{\mathsf{R}}}}}
+\newcommand{\since}{\ensuremath{\mathbin{\bm{\mathsf{S}}}}}
+\newcommand{\trigger}{\ensuremath{\mathbin{\bm{\mathsf{T}}}}}
+\newcommand{\finally}{\ensuremath{\bm{\mathsf{F}}}}
+\newcommand{\initially}{\ensuremath{\bm{\mathsf{I}}}}
+
+\newcommand{\dalways}[1]{\ensuremath{[#1]\,}}                        % \DBox
+\newcommand{\deventually}[1]{\ensuremath{\langle#1\rangle\,}}        % \DDia
+\newcommand{\drel}[2]{\ensuremath{{\parallel}{#1}{\parallel}^{#2}}}  % \Rel
