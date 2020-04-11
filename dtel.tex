@@ -1,5 +1,6 @@
 \RequirePackage{bm}
 \RequirePackage{textcomp}
+\IfFileExists{./outline.tex}{\input{outline}}{}
 
 \newcommand{\tuple}[1]{\langle #1 \rangle}
 \renewcommand{\H}{\ensuremath{\mathbf{H}}} % REDEFINITION
@@ -14,11 +15,17 @@
 \newcommand{\alwaysP}{\ensuremath{\blacksquare}}
 \newcommand{\eventuallyF}{\ensuremath{\Diamond}}
 \newcommand{\eventuallyP}{\ensuremath{\blacklozenge}}
-\newcommand{\until}{\ensuremath{\mathbin{\bm{\mathsf{U}}}}}
-\newcommand{\release}{\ensuremath{\mathbin{\bm{\mathsf{R}}}}}
+\IfFileExists{./outline.tex}
+        {\newcommand{\until}{\ensuremath{\mathbin{\mbox{\outline{$\bm{\mathsf{U}}$}}}}}}
+        {\newcommand{\until}{\ensuremath{\mathbin{\bm{\mathsf{U}}}}}}
+\IfFileExists{./outline.tex}
+        {\newcommand{\release}{\ensuremath{\mathbin{\mbox{\outline{$\bm{\mathsf{R}}$}}}}}}
+        {\newcommand{\release}{\ensuremath{\mathbin{\bm{\mathsf{R}}}}}}
 \newcommand{\since}{\ensuremath{\mathbin{\bm{\mathsf{S}}}}}
 \newcommand{\trigger}{\ensuremath{\mathbin{\bm{\mathsf{T}}}}}
-\newcommand{\finally}{\ensuremath{\bm{\mathsf{F}}}}
+\IfFileExists{./outline.tex}
+        {\newcommand{\finally}{\ensuremath{\mbox{\outline{$\bm{\mathsf{F}}$}}}}}
+        {\newcommand{\finally}{\ensuremath{\bm{\mathsf{F}}}}}
 \newcommand{\initially}{\ensuremath{\bm{\mathsf{I}}}}
 
 \newcommand{\dalways}[1]{\ensuremath{[#1]\,}}                        % \DBox
