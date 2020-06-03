@@ -1,8 +1,24 @@
 % The language definitions below require the following packages:
 %
+%     \usepackage{courier}
 %     \usepackage{xcolor}
 %     \usepackage{relsize}
-%     \usepackage{courier}
+%
+%     \input{listings}
+%     \renewcommand{\Underscore}{\textscale{1}{\textunderscore}}
+%
+% Without extra packages I had to provide an alternative underscore definition
+% to get decent looking underscores.
+%
+% As an alternative to courier, it is also possible to use the `lmodern`
+% package.
+%
+%     \usepackage[T1]{fontenc}
+%     \usepackage{lmodern}
+%     \usepackage{xcolor}
+%     \usepackage{relsize}
+%
+%     \input{listings}
 %
 % When the python or clingo language is given, tex code can be embedded
 % escaping it in `#( ... #)`, which is treated like a comment in Python.
@@ -16,8 +32,7 @@
 % line numbers when refactoring. The annotated program will still be runnable
 % with clingo.
 
-% Attention hack! Better alternatives welcome!
-\newcommand{\Underscore}{\textscale{1.3}{\textunderscore}}
+\providecommand{\Underscore}{\textunderscore}
 
 \lstdefinelanguage{clingo}{%
   basicstyle=\ttfamily,%
