@@ -1,3 +1,44 @@
-\newcommand{\DBox}[1]{\ensuremath{[#1]\,}}
-\newcommand{\DDia}[1]{\ensuremath{\langle#1\rangle\,}}
-\newcommand{\Rel}[2]{\ensuremath{{\parallel}{#1}{\parallel}^{#2}}}
+\RequirePackage{bm}
+\RequirePackage{textcomp}
+\RequirePackage{upgreek}
+
+\IfFileExists{outline.tex}{\input{outline}}{}
+
+\newcommand{\tuple}[1]{\langle #1 \rangle}
+\renewcommand{\H}{\ensuremath{\mathbf{H}}} % REDEFINITION
+\newcommand{\T}{\ensuremath{\mathbf{T}}}
+\newcommand{\M}{\ensuremath{\mathbf{M}}}
+
+\newcommand{\next}{\text{\rm \raisebox{-.5pt}{\Large\textopenbullet}}}  % {{\ensuremath{\circ}}}
+\newcommand{\previous}{\text{\rm \raisebox{-.5pt}{\Large\textbullet}}}  % {{\ensuremath{\bullet}}}
+\newcommand{\wnext}{\ensuremath{\widehat{\next}}}
+\newcommand{\wprevious}{\ensuremath{\widehat{\previous}}}
+\newcommand{\alwaysF}{\ensuremath{\square}}
+\newcommand{\alwaysP}{\ensuremath{\blacksquare}}
+\newcommand{\eventuallyF}{\ensuremath{\Diamond}}
+\newcommand{\eventuallyP}{\ensuremath{\blacklozenge}}
+\IfFileExists{outline.tex}
+        {\newcommand{\until}{\ensuremath{\mathbin{\mbox{\outline{$\bm{\mathsf{U}}$}}}}}}
+        {\newcommand{\until}{\ensuremath{\mathbin{\bm{\mathsf{U}}}}}}
+\IfFileExists{outline.tex}
+        {\newcommand{\release}{\ensuremath{\mathbin{\mbox{\outline{$\bm{\mathsf{R}}$}}}}}}
+        {\newcommand{\release}{\ensuremath{\mathbin{\bm{\mathsf{R}}}}}}
+\newcommand{\since}{\ensuremath{\mathbin{\bm{\mathsf{S}}}}}
+\newcommand{\trigger}{\ensuremath{\mathbin{\bm{\mathsf{T}}}}}
+\IfFileExists{outline.tex}
+        {\newcommand{\finally}{\ensuremath{\mbox{\outline{$\bm{\mathsf{F}}$}}}}}
+        {\newcommand{\finally}{\ensuremath{\bm{\mathsf{F}}}}}
+\newcommand{\initially}{\ensuremath{\bm{\mathsf{I}}}}
+
+\newcommand{\stp}{\ensuremath{\uptau}}
+
+\newcommand{\dalways}[1]{\ensuremath{[#1]\,}}                        % \DBox
+\newcommand{\deventually}[1]{\ensuremath{\langle#1\rangle\,}}        % \DDia
+\newcommand{\drel}[2]{\ensuremath{{\parallel}{#1}{\parallel}^{#2}}}  % \Rel
+
+\newcommand{\intervc}[2]{[#1..#2]}
+\newcommand{\intervo}[2]{[#1..#2)}
+\newcommand{\ointerv}[2]{(#1..#2]}
+\newcommand{\rangec}[3]{#1 \in \intervc{#2}{#3}}
+\newcommand{\rangeo}[3]{#1 \in \intervo{#2}{#3}}
+\newcommand{\orange}[3]{#1 \in \ointerv{#2}{#3}}

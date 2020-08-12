@@ -1,0 +1,32 @@
+\RequirePackage{xcolor}
+\makeatletter
+
+%%% MALIPIVO's PDF SPECIAL TO CHANGE FONT OUTLINE THICKNESS/COLOR
+% https://tex.stackexchange.com/questions/18472/tikz-halo-around-text/169549#169549
+\input pdf-trans
+\newbox\qbox
+\def\usecolor#1{\csname\string\color@#1\endcsname\space}
+\newcommand\bordercolor[1]{\colsplit{1}{#1}}
+\newcommand\fillcolor[1]{\colsplit{0}{#1}}
+\newcommand\outline[1]{\leavevmode%
+  \def\maltext{#1}%
+  \setbox\qbox=\hbox{\maltext}%
+  \boxgs{Q q 2 Tr \thickness\space w \fillcol\space \bordercol\space}{}%
+  \copy\qbox%
+}
+\makeatother
+\newcommand\colsplit[2]{\colorlet{tmpcolor}{#2}\edef\tmp{\usecolor{tmpcolor}}%
+  \def\tmpB{}\expandafter\colsplithelp\tmp\relax%
+  \ifnum0=#1\relax\edef\fillcol{\tmpB}\else\edef\bordercol{\tmpC}\fi}
+\def\colsplithelp#1#2 #3\relax{%
+  \edef\tmpB{\tmpB#1#2 }%
+  \ifnum `#1>`9\relax\def\tmpC{#3}\else\colsplithelp#3\relax\fi
+}
+\bordercolor{black}
+\fillcolor{white}
+\def\thickness{.3}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:
