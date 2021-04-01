@@ -4,11 +4,6 @@
 
 \IfFileExists{outline.tex}{\input{outline}}{}
 
-\newcommand{\tuple}[1]{\langle #1 \rangle}
-\renewcommand{\H}{\ensuremath{\mathbf{H}}} % REDEFINITION
-\newcommand{\T}{\ensuremath{\mathbf{T}}}
-\newcommand{\M}{\ensuremath{\mathbf{M}}}
-
 \newcommand{\next}{\text{\rm \raisebox{-.5pt}{\Large\textopenbullet}}}  % {{\ensuremath{\circ}}}
 \newcommand{\previous}{\text{\rm \raisebox{-.5pt}{\Large\textbullet}}}  % {{\ensuremath{\bullet}}}
 \newcommand{\wnext}{\ensuremath{\widehat{\next}}}
@@ -23,6 +18,9 @@
 \IfFileExists{outline.tex}
         {\newcommand{\release}{\ensuremath{\mathbin{\mbox{\outline{$\bm{\mathsf{R}}$}}}}}}
         {\newcommand{\release}{\ensuremath{\mathbin{\bm{\mathsf{R}}}}}}
+\IfFileExists{outline.tex}
+        {\newcommand{\while}{\ensuremath{\mathbin{\mbox{\outline{$\bm{\mathsf{W}}$}}}}}}
+        {\newcommand{\while}{\ensuremath{\mathbin{\bm{\mathsf{W}}}}}}
 \newcommand{\since}{\ensuremath{\mathbin{\bm{\mathsf{S}}}}}
 \newcommand{\trigger}{\ensuremath{\mathbin{\bm{\mathsf{T}}}}}
 \IfFileExists{outline.tex}
