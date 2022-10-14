@@ -29,9 +29,14 @@
 \newcommand{\initially}{\ensuremath{\bm{\mathsf{I}}}}
 
 \newcommand{\stp}{\ensuremath{\uptau}}
+\mathchardef\mhyphen="2D 
+\newcommand{\prev}{\ensuremath{\stp^{\mhyphen}}}
+\newcommand{\prevs}{\ensuremath{\stp^{\mhyphen *}}}
 
 \newcommand{\dalways}[1]{\ensuremath{[#1]\,}}                        % \DBox
+\newcommand{\DBox}[1]{\dalways{#1}}
 \newcommand{\deventually}[1]{\ensuremath{\langle#1\rangle\,}}        % \DDia
+\newcommand{\DDia}[1]{\deventually{#1}}
 \newcommand{\drel}[2]{\ensuremath{{\parallel}{#1}{\parallel}^{#2}}}  % \Rel
 
 \newcommand{\intervcc}[2]{\ensuremath{[#1..#2]}}
@@ -42,3 +47,12 @@
 \newcommand{\rangeco}[3]{\ensuremath{#1 \in \intervco{#2}{#3}}}
 \newcommand{\rangeoc}[3]{\ensuremath{#1 \in \intervoc{#2}{#3}}}
 \newcommand{\rangeoo}[3]{\ensuremath{#1 \in \intervoo{#2}{#3}}}
+
+\newcommand{\nnf}[1]{\ensuremath{\mathit{nnf}({#1})}}
+\newcommand{\cl}[1]{\ensuremath{\mathit{cl}({#1})}}
+% Non-circular Fisher lander
+\newcommand{\fl}[1]{\ensuremath{\textit{FL}(#1)}}
+\newcommand{\fls}[2]{\ensuremath{\textit{FL}^\Box_{#2}(#1)}}
+\newcommand{\fld}[2]{\ensuremath{\textit{FL}^\diamond_{#2}(#1)}}
+
+\newcommand{\last}{\ensuremath{\mathit{last}}}
