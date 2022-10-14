@@ -1,0 +1,18 @@
+\newcounter{casenum}
+\newenvironment{caseof}{\setcounter{casenum}{1}}{\vskip.5\baselineskip}
+\renewenvironment{quote}{%
+  \list{}{%
+    \leftmargin15pt  
+    \rightmargin0cm
+  }
+  \item\relax
+}
+{\endlist}
+
+
+\newcommand{\case}[2]{\begin{quote} 
+    \hspace{-10pt}{\bfseries \textit{Case} $\bm{#1}$}: #2\end{quote}\addtocounter{casenum}{1}}
+\newcommand{\caselr}[1]{\begin{itemize}
+    \item[\ensuremath{\bm{\Rightarrow)}}] #1\end{itemize}}
+\newcommand{\caserl}[1]{\begin{itemize}
+    \item[\ensuremath{\bm{\Leftarrow)}}] #1\end{itemize}}
