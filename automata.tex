@@ -1,0 +1,122 @@
+% Automata
+\newcommand{\AFA}{\ensuremath{\mathrm{AFA}}}
+\newcommand{\automata}{\ensuremath{\mathfrak{A}}}
+\newcommand{\run}{\ensuremath{G=(V,E)}}
+
+% Word
+\newcommand{\wT}{\ensuremath{w}}
+ 
+% States
+\newcommand{\q}[1]{\ensuremath{q_{#1}\,}}
+\newcommand{\qstart}{\ensuremath{\q{{\textit{start}}}}}
+\newcommand{\qleft}{\ensuremath{\q{\vdash}}}
+\newcommand{\qright}{\ensuremath{\q{\dashv}}}
+
+% Transition function
+\newcommand{\fpbf}{\ensuremath{\bot}}
+\newcommand{\tpbf}{\ensuremath{\top}}
+\newcommand{\pbf}{\textit{pbf}}
+% Transitions with sigma conditioned
+\newcommand{\interp}{X}
+\newcommand{\sigmaf}[1]{X_{#1}}
+\newcommand{\sigmat}{\sigmaf{\top}}
+
+\newcommand{\A}{\ensuremath{\mathcal{A }}}
+\newcommand{\trace}{\T}
+
+% 2AFA
+\newcommand{\conf}[2]{\langle#1,#2\rangle}
+\newcommand{\Tend}{\ensuremath{\vdash\T\dashv}}
+\newcommand{\Tendl}{\ensuremath{\vdash \T_0 \cdots \T_{\lambda-1}\dashv}}
+
+% Translations
+\newcommand{\srtm}{\ensuremath{ST_m}}
+\newcommand{\srtp}{\ensuremath{ST_p}}
+\newcommand{\srtx}{\ensuremath{ST}}
+\newcommand{\mso}{\text{mso}}
+
+
+% ------ TIKZ 
+
+
+% Rewrite Next to be able to import tikz 
+\providecommand{\Next}{\text{\rm \raisebox{-.5pt}{\Large\textopenbullet}}}  % {{\ensuremath{\circ}}}
+\providecommand{\wNext}{\ensuremath{\widehat{\Next}}}
+
+\usepackage{tikz} %Must go after macros
+\usetikzlibrary{patterns,shapes.arrows,arrows,automata,positioning,trees,calc,shadows,positioning,fit,bending,fit}
+\usepackage{tikz-cd}
+
+
+\newcommand\addvmargin[1]{
+  \node[fit=(current bounding box),inner ysep=#1,inner xsep=0]{};
+}
+\tikzset{
+	arrows = {[bend]},
+	>=latex',node distance=48pt,on grid,auto,initial text=,
+	state/.style = {
+		draw,
+		circle,
+		font=\footnotesize,
+		minimum width=0.5cm,
+		minimum height=0.5cm,
+		fill=gray!10
+	},
+	config/.style = {
+		font=\footnotesize
+	},
+	config_accept/.style = {
+		config,
+		color=green
+	},
+	trans/.style = {
+		font=\tiny,
+		color=gray
+	},
+	all/.style = {
+		font=\scriptsize
+	},
+	run/.style = {
+		-{Stealth[length=2.5, width=2.5]}
+	},
+	head/.style = {
+		S-{Stealth[length=2.5, width=2.5]},
+		sloped,
+		inner sep = 0.6pt
+	},
+	headS/.style = {
+		S-{Stealth[length=2.5, width=2.5]},
+		sloped,
+		inner sep = 0.6pt
+	},
+	headR/.style = {
+		R-{Stealth[length=2.5, width=2.5]},
+		sloped,
+		inner sep = 0.6pt,
+		color=blue
+	},
+	headL/.style = {
+		L-{Stealth[length=2.5, width=2.5]},
+		sloped,
+		inner sep = 0.6pt,
+		color=red
+	},
+	R/.tip = {%
+		.[length=3]
+		_[sep=2pt 2]
+		Bar[sep=-1.7pt -2, length=0pt 1, width=3pt 3, line width=0.8]
+		Bar[sep=1pt 0, length=3pt 3,width=0pt 1,line width=0.6]
+	}, 
+	every loop/.style={
+		min distance=10mm,
+		looseness=10
+	},
+	L/.tip = {%
+		.
+		_[sep=2pt 2]
+		Bar[sep=1pt 0, length=3pt 3,width=0pt 1, line width=0.6]
+	},
+	S/.tip = {%
+		.
+	}
+}
