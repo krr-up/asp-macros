@@ -47,6 +47,7 @@
 \usetikzlibrary{patterns,shapes.arrows,arrows,automata,positioning,trees,calc,shadows,positioning,fit,bending,fit}
 \usepackage{tikz-cd}
 
+\newcommand{\invisibleopac}{0.4}
 
 \newcommand\addvmargin[1]{
   \node[fit=(current bounding box),inner ysep=#1,inner xsep=0]{};
@@ -118,5 +119,12 @@
 	},
 	S/.tip = {%
 		.
-	}
+	},
+
+	% ----- Beamer styles
+	invisible/.style={opacity=\invisibleopac},
+  	visible on/.style={alt={#1{}{invisible}}},
+  	alt/.code args={<#1>#2#3}{%
+    	\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+  	}
 }
