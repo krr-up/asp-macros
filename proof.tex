@@ -2,19 +2,29 @@
 \newenvironment{caseof}{\setcounter{casenum}{1}}{\vskip.5\baselineskip}
 \renewenvironment{quote}{%
   \list{}{%
-    \leftmargin15pt  
+    \leftmargin15pt
     \rightmargin0cm
   }
   \item\relax
 }
 {\endlist}
 
-
-\newcommand{\case}[2]{\begin{quote} 
+\newcommand{\casex}[2]{\begin{quote}
     \hspace{-10pt}{\bfseries \textit{Case} $\bm{#1}$}: #2\end{quote}\addtocounter{casenum}{1}}
+\newcommand{\casesimple}[2]{\begin{quote}
+  \hspace{-10pt}{\bfseries $\bm{#1}$} #2\end{quote}\addtocounter{casenum}{1}}
 \newcommand{\caselr}[1]{\begin{itemize}
     \item[\ensuremath{\bm{\Rightarrow)}}] #1\end{itemize}}
 \newcommand{\caseeq}[1]{\begin{itemize}
     \item[\ensuremath{\bm{\Leftrightarrow )}}] #1\end{itemize}}
 \newcommand{\caserl}[1]{\begin{itemize}
     \item[\ensuremath{\bm{\Leftarrow)}}] #1\end{itemize}}
+
+\newcommand{\circled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {#1}}}}
+
+\newcommand{\reason}[1]{{\hspace*{20pt}\color{gray}(#1)}}
+\newcommand{\itemif}{\item[$\Rightarrow$]}
+\newcommand{\itemiff}{\item[$\Leftrightarrow$]}
+\newcommand{\itemipoint}[1]{\item[]\item[\textbf{\circled{#1}}]}
+\newcommand{\itemspace}{\item[]\item[]}
+\newcommand{\items}{\item[]}
