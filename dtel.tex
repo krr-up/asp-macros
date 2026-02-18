@@ -4,7 +4,8 @@
 
 \IfFileExists{outline.tex}{\input{outline}}{}
 
-\newcommand{\next}{\text{\rm \raisebox{-.5pt}{\Large\textopenbullet}}}  % {{\ensuremath{\circ}}}
+\providecommand{\next}{}
+\renewcommand{\next}{\text{\rm \raisebox{-.5pt}{\Large\textopenbullet}}}  % {{\ensuremath{\circ}}}
 \newcommand{\previous}{\text{\rm \raisebox{-.5pt}{\Large\textbullet}}}  % {{\ensuremath{\bullet}}}
 \newcommand{\wnext}{\ensuremath{\widehat{\next}}}
 \newcommand{\wprevious}{\ensuremath{\widehat{\previous}}}
