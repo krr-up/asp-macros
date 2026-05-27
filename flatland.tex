@@ -1,0 +1,398 @@
+\usepackage{tikz}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing}
+
+\tikzstyle{rails}=[
+    postaction={draw=darkgray,decorate,decoration={curveto,raise=4pt},line width=1.75pt},
+    postaction={draw=darkgray,decorate,decoration={curveto,raise=-4pt},line width=1.75pt}]
+
+\tikzstyle{sleepers}=[
+    postaction={draw=brown!75, densely dashed,line width=14pt}] 
+
+
+
+% constituent track components    
+\newcommand{\trackblank}[2]{
+    \draw[draw=darkgray!75, line width=0.15mm] (#1 - 0.5, #2 - 0.5) rectangle ++(1,1);
+    \node[align=left] at (#1 +0.35,#2 +0.35) {\footnotesize{0}}; 
+}
+
+\newcommand{\trackhorizontal}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm, label={[blue]30:\small $1$}] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{1}}; 
+    }
+}
+
+\newcommand{\trackvertical}[3][false]{
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm, label={[blue]30:\small $1$}] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{1}}; 
+    }
+}
+
+\newcommand{\trackcurvesw}[3][false]{
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{8}}; 
+    }
+}
+
+\newcommand{\trackcurvese}[3][false]{
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{8}}; 
+    }
+}
+
+\newcommand{\trackcurvenw}[3][false]{
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{8}}; 
+    }
+}
+
+\newcommand{\trackcurvene}[3][false]{
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{8}}; 
+
+    }
+}
+
+
+% switches
+% 37408 - vertical + sw
+\newcommand{\vsw}[3][false]{
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{2}}; 
+    }
+}
+
+% 17411 - horizontal + se
+\newcommand{\hse}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{2}}; 
+    }
+
+}
+
+% 32872 - vertical + ne
+\newcommand{\vne}[3][false]{
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{2}}; 
+    }
+}
+
+% 3089 - horizontal + nw
+\newcommand{\hnw}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{2}}; 
+    }
+}
+
+% 5633 - horizontal + sw
+\newcommand{\hsw}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{9}}; 
+    }
+}
+
+% 49186 - vertical + se
+\newcommand{\vse}[3][false]{
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{9}}; 
+    }
+}
+
+% 1097 - horizontal + ne
+\newcommand{\hne}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{9}}; 
+    }
+
+}
+
+% 34864 - vertical + nw
+\newcommand{\vnw}[3][false]{
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{9}}; 
+    }
+}
+
+% crossing
+% 33825
+\newcommand{\crossing}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{3}}; 
+    }
+}
+
+% single slip switches
+% 38433
+\newcommand{\hvsw}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{4}}; 
+    }
+}
+
+% 50211
+\newcommand{\hvse}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{4}}; 
+    }
+}
+
+% 33897
+\newcommand{\hvne}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{4}}; 
+    }
+}
+
+% 35889
+\newcommand{\hvnw}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{4}}; 
+    }
+}
+
+% double slip switch
+% 38505
+\newcommand{\hvnesw}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{5}}; 
+    }
+}
+
+% 52275
+\newcommand{\hvnwse}[3][false]{
+    \path[sleepers] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[sleepers] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2 - 0.5 , #3) to (#2 + 0.5 , #3);
+    \path[rails] (#2 , #3 - 0.5) to (#2 , #3 + 0.5);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{5}}; 
+    }
+}
+
+% symmetrical switches
+% 20994
+\newcommand{\swse}[3][false]{
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{6}}; 
+    }
+}
+
+% 16458
+\newcommand{\sene}[3][false]{
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{6}}; 
+    }
+}
+
+% 2136
+\newcommand{\nenw}[3][false]{
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=180] (#2 + 0.5, #3);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{6}}; 
+    }
+}
+
+% 6672
+
+\newcommand{\nwsw}[3][false]{
+    \path[sleepers] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \path[sleepers] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2, #3 + 0.5) to[out=270, in=0] (#2 - 0.5, #3);
+    \path[rails] (#2, #3 - 0.5) to[out=90, in=0] (#2 - 0.5, #3);
+    \ifthenelse{\equal{#1}{border}}{
+        \draw[draw=darkgray!75, line width=0.15mm] (#2 - 0.5, #3 - 0.5) rectangle ++(1,1);
+        \node[align=left] at (#2 +0.35,#3 +0.35) {\footnotesize{6}}; 
+    }
+}
+
+
+% full track type
+\newcommand{\track}[4]{
+    % blank tracks
+        \ifnum#1=0      \trackblank{#2}{#3}
+        \fi
+
+    % straight tracks
+         \ifnum#1=32800 \trackvertical[#4]{#2}{#3}
+    \else\ifnum#1=1025  \trackhorizontal[#4]{#2}{#3}
+    \else               \relax
+    \fi\fi
+
+    % curved tracks
+         \ifnum#1=4608  \trackcurvesw[#4]{#2}{#3}
+    \else\ifnum#1=16386 \trackcurvese[#4]{#2}{#3}
+    \else\ifnum#1=72    \trackcurvene[#4]{#2}{#3}
+    \else\ifnum#1=2064  \trackcurvenw[#4]{#2}{#3}
+    \else               \relax
+    \fi\fi\fi\fi
+
+    % simple switches
+         \ifnum#1=37408 \vsw[#4]{#2}{#3}
+    \else\ifnum#1=17411 \hse[#4]{#2}{#3}
+    \else\ifnum#1=32872 \vne[#4]{#2}{#3}
+    \else\ifnum#1=3089  \hnw[#4]{#2}{#3}
+    \else               \relax
+    \fi\fi\fi\fi
+
+         \ifnum#1=5633  \hsw[#4]{#2}{#3}
+    \else\ifnum#1=49186 \vse[#4]{#2}{#3}
+    \else\ifnum#1=1097  \hne[#4]{#2}{#3}
+    \else\ifnum#1=34864 \vnw[#4]{#2}{#3}
+    \else               \relax
+    \fi\fi\fi\fi
+
+    % crossing
+         \ifnum#1=33825 \crossing[#4]{#2}{#3}
+    \else               \relax
+    \fi
+
+    % slip switches
+         \ifnum#1=38433 \hvsw[#4]{#2}{#3}
+    \else\ifnum#1=50211 \hvse[#4]{#2}{#3}
+    \else\ifnum#1=33897 \hvne[#4]{#2}{#3}
+    \else\ifnum#1=35889 \hvnw[#4]{#2}{#3}
+    \else               \relax
+    \fi\fi\fi\fi
+
+    % double-slip switches
+         \ifnum#1=38505 \hvnesw[#4]{#2}{#3}
+    \else\ifnum#1=52275 \hvnwse[#4]{#2}{#3}
+    \else               \relax
+    \fi\fi
+
+    % symmetrical switches
+         \ifnum#1=20994 \swse[#4]{#2}{#3}
+    \else\ifnum#1=16458 \sene[#4]{#2}{#3}
+    \else\ifnum#1=2136  \nenw[#4]{#2}{#3}
+    \else\ifnum#1=6672  \nwsw[#4]{#2}{#3}
+    \else               \relax
+    \fi\fi\fi\fi
+    
+
+}
+
+% Define flatland-env environment
+\newenvironment{flatland-env}[1][1.2]
+  {\begin{tikzpicture}[scale=#1]} % begin code
+  {\end{tikzpicture}}              % end code
